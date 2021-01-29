@@ -1,0 +1,3 @@
+
+02:56:01,269 INFO  [ru.geekbrains.FirstServlet] (default task-1) FirstServlet is initialized
+02:56:01,270 INFO  [ru.geekbrains.FirstServlet] (default task-1) Request in FirstServlet
