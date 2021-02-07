@@ -10,10 +10,23 @@
         <servlet-name>FirstServlet</servlet-name>
         <servlet-class>ru.geekbrains.FirstServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>NotFoundServlet</servlet-name>
+        <servlet-class>ru.geekbrains.NotFoundServlet</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>FirstServlet</servlet-name>
         <url-pattern>/hello-world</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NotFoundServlet</servlet-name>
+        <url-pattern>/not-found</url-pattern>
+    </servlet-mapping>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/not-found</location>
+    </error-page>
 
 </web-app>
