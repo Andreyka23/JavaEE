@@ -1,0 +1,6 @@
+ru\geekbrains\controller\ProductController.class
+ru\geekbrains\persist\CartItem.class
+ru\geekbrains\controller\CartController.class
+ru\geekbrains\persist\CartRepository.class
+ru\geekbrains\persist\Product.class
+ru\geekbrains\persist\ProductRepository.class
