@@ -22,13 +22,14 @@ public class NavigationServlet extends HttpServlet {
         links.put("cart", "Cart");
         links.put("order", "Order");
 
+
         resp.getWriter().println("<h1>" + navLink + "</h1>");
 
         for (String i : links.keySet()) {
             if (navLink.equals(i))
                 resp.getWriter().println("<b>" + links.get(i) + "</b>");
             else
-                resp.getWriter().println("<a href='/first-web-app/" + i + "'>" + links.get(i) + "</a>");
+                resp.getWriter().println("<a href='"+req.getContextPath()+"/" + i + "'>" + links.get(i) + "</a>");
         }
     }
 }
