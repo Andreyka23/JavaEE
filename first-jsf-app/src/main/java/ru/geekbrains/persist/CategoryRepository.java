@@ -12,17 +12,13 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import javax.transaction.UserTransaction;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicLong;
 
 @Named
 @ApplicationScoped
-public class ProductRepository {
+public class CategoryRepository {
 
-    private static final Logger logger = LoggerFactory.getLogger(ProductRepository.class);
+    private static final Logger logger = LoggerFactory.getLogger(CategoryRepository.class);
 
     @PersistenceContext(unitName = "ds")
     private EntityManager em;
@@ -36,12 +32,9 @@ public class ProductRepository {
             try {
                 ut.begin();
 
-                saveOrUpdate(new Product(null, "Product  1",
-                        "Description of product 1", new BigDecimal(100)));
-                saveOrUpdate(new Product(null, "Product  2",
-                        "Description of product 2", new BigDecimal(200)));
-                saveOrUpdate(new Product(null, "Product  3",
-                        "Description of product 3", new BigDecimal(200)));
+                saveOrUpdate(new Category(null, "Category  1"));
+                saveOrUpdate(new Category(null, "Category  2"));
+                saveOrUpdate(new Category(null, "Category  3"));
 
                 ut.commit();
             } catch (Exception ex) {
@@ -51,31 +44,31 @@ public class ProductRepository {
         }
     }
 
-    public List<Product> findAll() {
-        return em.createNamedQuery("findAll", Product.class)
+    public List<Category> findAll() {
+        return em.createNamedQuery("findAllCategories", Category.class)
                 .getResultList();
     }
 
-    public Product findById(Long id) {
-        return em.find(Product.class, id);
+    public Category findById(Long id) {
+        return em.find(Category.class, id);
     }
 
     public Long countAll() {
-        return em.createNamedQuery("countAll", Long.class)
+        return em.createNamedQuery("countAllCategories", Long.class)
                 .getSingleResult();
     }
 
     @Transactional
-    public void saveOrUpdate(Product product) {
-        if (product.getId() == null) {
-            em.persist(product);
+    public void saveOrUpdate(Category category) {
+        if (category.getId() == null) {
+            em.persist(category);
         }
-        em.merge(product);
+        em.merge(category);
     }
 
     @Transactional
     public void deleteById(Long id) {
-        em.createNamedQuery("deleteById")
+        em.createNamedQuery("deleteCategoriesById")
                 .setParameter("id", id)
                 .executeUpdate();
     }
