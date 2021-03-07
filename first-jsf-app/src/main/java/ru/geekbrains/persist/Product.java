@@ -1,5 +1,7 @@
 package ru.geekbrains.persist;
 
+import ru.geekbrains.service.ProductRepr;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
@@ -25,6 +27,9 @@ public class Product {
     @Column
     private BigDecimal price;
 
+    @ManyToOne
+    private Category category;
+
     public Product() {
     }
 
@@ -34,6 +39,12 @@ public class Product {
         this.description = description;
         this.price = price;
     }
+
+    public Product(ProductRepr productRepr, Category category) {
+        this(productRepr.getId(), productRepr.getName(), productRepr.getDescription(), productRepr.getPrice());
+        this.category = category;
+    }
+
 
     public Long getId() {
         return id;
@@ -65,5 +76,13 @@ public class Product {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

@@ -49,6 +49,10 @@
                             #{product.price}
                         </h:column>
                         <h:column>
+                            <f:facet name="header">Category</f:facet>
+                            #{product.categoryName}
+                        </h:column>
+                        <h:column>
                             <f:facet name="header">Actions</f:facet>
 
                             <h:commandButton value="Edit" styleClass="btn btn-success"
