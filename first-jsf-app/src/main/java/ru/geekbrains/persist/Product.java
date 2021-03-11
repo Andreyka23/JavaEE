@@ -8,9 +8,9 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "products")
 @NamedQueries({
-        @NamedQuery(name = "findAll", query = "from Product"),
-        @NamedQuery(name = "countAll", query = "select count(*) from Product"),
-        @NamedQuery(name = "deleteById", query = "delete from Product p where p.id = :id")
+        @NamedQuery(name = "findAllProducts", query = "from Product"),
+        @NamedQuery(name = "countAllProducts", query = "select count(*) from Product"),
+        @NamedQuery(name = "deleteProductById", query = "delete from Product p where p.id = :id")
 })
 public class Product {
 
@@ -44,7 +44,6 @@ public class Product {
         this(productRepr.getId(), productRepr.getName(), productRepr.getDescription(), productRepr.getPrice());
         this.category = category;
     }
-
 
     public Long getId() {
         return id;
