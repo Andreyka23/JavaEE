@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
@@ -14,35 +15,13 @@ import javax.transaction.UserTransaction;
 import java.math.BigDecimal;
 import java.util.List;
 
-@Named
-@ApplicationScoped
+@Stateless
 public class CategoryRepository {
 
     private static final Logger logger = LoggerFactory.getLogger(CategoryRepository.class);
 
     @PersistenceContext(unitName = "ds")
     private EntityManager em;
-
-    @Resource
-    private UserTransaction ut;
-
-    @PostConstruct
-    public void init() throws Exception {
-        if (countAll() == 0) {
-            try {
-                ut.begin();
-
-                saveOrUpdate(new Category(null, "Category  1"));
-                saveOrUpdate(new Category(null, "Category  2"));
-                saveOrUpdate(new Category(null, "Category  3"));
-
-                ut.commit();
-            } catch (Exception ex) {
-                logger.error("", ex);
-                ut.rollback();
-            }
-        }
-    }
 
     public List<Category> findAll() {
         return em.createNamedQuery("findAllCategories", Category.class)
@@ -53,12 +32,15 @@ public class CategoryRepository {
         return em.find(Category.class, id);
     }
 
+    public Category getReference(Long id) {
+        return em.getReference(Category.class, id);
+    }
+
     public Long countAll() {
         return em.createNamedQuery("countAllCategories", Long.class)
                 .getSingleResult();
     }
 
-    @Transactional
     public void saveOrUpdate(Category category) {
         if (category.getId() == null) {
             em.persist(category);
@@ -66,9 +48,8 @@ public class CategoryRepository {
         em.merge(category);
     }
 
-    @Transactional
     public void deleteById(Long id) {
-        em.createNamedQuery("deleteCategoriesById")
+        em.createNamedQuery("deleteCategoryById")
                 .setParameter("id", id)
                 .executeUpdate();
     }
