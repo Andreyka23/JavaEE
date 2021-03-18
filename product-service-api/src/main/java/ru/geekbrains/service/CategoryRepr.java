@@ -1,7 +1,5 @@
 package ru.geekbrains.service;
 
-import ru.geekbrains.persist.Category;
-
 import java.io.Serializable;
 
 // DTO
@@ -16,9 +14,9 @@ public class CategoryRepr implements Serializable {
     public CategoryRepr() {
     }
 
-    public CategoryRepr(Category category) {
-        id = category.getId();
-        name = category.getName();
+    public CategoryRepr(Long id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public Long getId() {
