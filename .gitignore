@@ -1,2 +1,5 @@
 /.idea
 /first-web-app/target
+/first-jsf-app/target
+/product-service-api/target
+/remote-client/target
